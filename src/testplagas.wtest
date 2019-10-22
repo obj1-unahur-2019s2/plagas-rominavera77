@@ -1,0 +1,50 @@
+import elementos.*
+import plagas.*
+
+describe " Plagas y Elementos " {
+	
+	var cucaracha1 = new PlagaCucaracha(poblacion = 8, pesoPromedio = 12)
+	var pulga1 = new PlagaPulga(poblacion = 40)
+	var mosquito1 = new PlagaMosquito( poblacion = 24)
+	
+	var hogar1 = new Hogar(nivelDeMugre = 5, nivelDeConfort = 10)
+	var huerta1 = new Huerta(capacidadDeProduccion = 50, nivelDeProduccion = 10)
+	
+	test " Cucaracha 1"{
+		assert.equals(4,cucaracha1.nivelDeDanio())
+		assert.notThat(cucaracha1.transmiteEnfermedades())
+	}
+	
+	test "Pulga 1"{	
+		assert.equals(80, pulga1.nivelDeDanio())
+		assert.that(pulga1.transmiteEnfermedades())
+	}
+
+	
+	test " Mosquito 1"{
+		assert.equals(24, mosquito1.nivelDeDanio())
+		assert.that(mosquito1.transmiteEnfermedades())
+	}
+
+	test " Hogar 1" {
+		hogar1.efectosDeUnAtaque(mosquito1)
+		assert.equals(29,hogar1.nivelDeMugre())		
+		hogar1.efectosDeUnAtaque(pulga1)
+		assert.equals(109,hogar1.nivelDeMugre())
+		hogar1.efectosDeUnAtaque(cucaracha1)
+		assert.equals(113,hogar1.nivelDeMugre())
+	}
+
+	test " Huerta 1" {
+		huerta1.efectosDeUnAtaque(mosquito1)
+		assert.equals(37.6,huerta1.capacidadDeProduccion())
+		huerta1.efectosDeUnAtaque(pulga1)
+		assert.equals(,huerta1.capacidadDeProduccion())
+		/*huerta1.efectosDeUnAtaque(cucaracha1)
+		assert.equals(,huerta1.capacidadDeProduccion())	*/	
+	}
+
+
+
+
+}
